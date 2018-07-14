@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ZiKaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewUrl" Type="varchar" MaxLength="500" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="QuizzesGroupId" Type="varchar" MaxLength="10" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Subject">
           <Key>
             <PropertyRef Name="Code" />
@@ -92,6 +102,7 @@
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
         <EntityContainer Name="ZiKaoModelStoreContainer">
+          <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TCore" EntityType="Self.TCore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIssue" EntityType="Self.TIssue" Schema="dbo" store:Type="Tables" />
@@ -164,6 +175,7 @@
           <EntitySet Name="Users" EntityType="ZiKaoModel.Users" />
           <EntitySet Name="VipUsers" EntityType="ZiKaoModel.VipUsers" />
           <EntitySet Name="Topic" EntityType="ZiKaoModel.Topic" />
+          <EntitySet Name="Question" EntityType="ZiKaoModel.Question" />
         </EntityContainer>
         <EntityType Name="Users">
           <Key>
@@ -204,6 +216,16 @@
           <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="TopId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="QuizzesGroupId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -298,6 +320,17 @@
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Question">
+            <EntityTypeMapping TypeName="ZiKaoModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="QuizzesGroupId" ColumnName="QuizzesGroupId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="NewUrl" ColumnName="NewUrl" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

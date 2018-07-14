@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +17,9 @@ namespace WindowsFormsApplication1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            log4net.Config.XmlConfigurator.Configure(new FileInfo(Path.Combine(Application.StartupPath, @"log4net.config")));
+         
             Application.Run(new FrmMain());
         }
     }

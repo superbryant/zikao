@@ -32,5 +32,6 @@ namespace Dal
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<VipUsers> VipUsers { get; set; }
         public virtual DbSet<Topic> Topic { get; set; }
+        public virtual DbSet<Question> Question { get; set; }
     }
 }

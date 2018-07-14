@@ -31,9 +31,9 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnGather = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.btnGather = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -77,6 +77,16 @@
             this.textBox1.Size = new System.Drawing.Size(221, 21);
             this.textBox1.TabIndex = 2;
             // 
+            // btnGather
+            // 
+            this.btnGather.Location = new System.Drawing.Point(395, 12);
+            this.btnGather.Name = "btnGather";
+            this.btnGather.Size = new System.Drawing.Size(97, 23);
+            this.btnGather.TabIndex = 1;
+            this.btnGather.Text = "采集";
+            this.btnGather.UseVisualStyleBackColor = true;
+            this.btnGather.Click += new System.EventHandler(this.button1_Click);
+            // 
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(242, 12);
@@ -85,7 +95,7 @@
             this.btnSearch.TabIndex = 1;
             this.btnSearch.Text = "查询";
             this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.button1_Click);
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // webBrowser1
             // 
@@ -97,16 +107,6 @@
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(593, 413);
             this.webBrowser1.TabIndex = 0;
-            // 
-            // btnGather
-            // 
-            this.btnGather.Location = new System.Drawing.Point(395, 12);
-            this.btnGather.Name = "btnGather";
-            this.btnGather.Size = new System.Drawing.Size(97, 23);
-            this.btnGather.TabIndex = 1;
-            this.btnGather.Text = "采集";
-            this.btnGather.UseVisualStyleBackColor = true;
-            this.btnGather.Click += new System.EventHandler(this.button1_Click);
             // 
             // dlgTopic
             // 
