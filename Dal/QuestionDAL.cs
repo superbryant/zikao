@@ -29,7 +29,7 @@ namespace Dal
         {
             using (ZiKaoEntities entities = new ZiKaoEntities())
             {
-                var list = entities.Question.Where(f=>f.Title!="").OrderByDescending(f => f.QuizzesGroupId).Take(take);
+                var list = entities.Question.Where(f => f.Title != "").OrderByDescending(f => f.QuizzesGroupId).Take(take);
                 return list.ToList();
             }
         }
@@ -38,8 +38,21 @@ namespace Dal
         {
             using (ZiKaoEntities entities = new ZiKaoEntities())
             {
-                var list = entities.Question.Where(f=>f.Title .Contains(search)).OrderByDescending(f => f.QuizzesGroupId).Take(take);
+                var list = entities.Question.Where(f => f.Title.Contains(search)).OrderByDescending(f => f.QuizzesGroupId).Take(take);
                 return list.ToList();
+            }
+        }
+
+        public bool UpdateComplected(string id)
+        {
+            using (ZiKaoEntities entities = new ZiKaoEntities())
+            {
+                string sql = @"UPDATE [dbo].[Question]
+   SET  [Comp] = 1
+      ,[UpdateDate] =getdate()
+ WHERE  QuizzesGroupId=" + id;
+              return   entities.Database.ExecuteSqlCommand(sql)>0;
+
             }
         }
     }

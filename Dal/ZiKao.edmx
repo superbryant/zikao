@@ -14,6 +14,9 @@
           <Property Name="Title" Type="nvarchar" MaxLength="100" />
           <Property Name="QuizzesGroupId" Type="varchar" MaxLength="10" />
           <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="Comp" Type="bit" />
+          <Property Name="AnswerCount" Type="int" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
@@ -226,6 +229,9 @@
           <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="QuizzesGroupId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="Comp" Type="Boolean" />
+          <Property Name="AnswerCount" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -327,6 +333,9 @@
           <EntitySetMapping Name="Question">
             <EntityTypeMapping TypeName="ZiKaoModel.Question">
               <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="AnswerCount" ColumnName="AnswerCount" />
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="QuizzesGroupId" ColumnName="QuizzesGroupId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />

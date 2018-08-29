@@ -60,16 +60,16 @@ namespace WindowsFormsApplication1
             //加载科目
             //加载章
             //加载节
-           
+
             InitialWebBrowser();
         }
 
         private void InitialWebBrowser()
         {
             this.webBrowser1.Navigate("about:blank");
-           
-   this.webBrowser1.Document.Write(
-     @"<html  >
+
+            this.webBrowser1.Document.Write(
+              @"<html  >
 
 <head>
 <meta http-equiv=Content-Type content=""text/html; charset=gb2312""> 
@@ -115,10 +115,10 @@ ins.mod {
 </body>
 
 </html>");
-          
+
         }
 
-       
+
 
         private void LoadChild(IList<Subject> allSubject)
         {
@@ -192,7 +192,7 @@ ins.mod {
                 textbox.SelectAll();
             }
         }
-        string text = string.Empty;
+        string _text = string.Empty;
         const string mask = "█";
 
         bool ValidateInput()
@@ -205,14 +205,14 @@ ins.mod {
         {
             if (ValidateInput() == false)
                 return;
-            text = txtC.Text;
+            _text = txtC.Text;
             EFRepository<TCore>.Instance.AddEntity(new TCore()
             {
                 CreateDate = DateTime.Now,
                 FStatus = true,
                 SCode = cboSection.SelectedValue.ToString(),
-                SContent = text,
-                Title = GetTitle(text)
+                SContent = _text,
+                Title = GetTitle(_text)
             });
 
             LoadGreateGreatChild();
@@ -240,7 +240,7 @@ ins.mod {
         private void NewMethod(int odd, int mod = 2)
         {
             txtC.Text = string.Empty;
-            var array = text.ToCharArray();
+            var array = _text.ToCharArray();
             int i = 0;
             foreach (var item in array)
             {
@@ -281,7 +281,7 @@ ins.mod {
 
         private void btnSource_Click(object sender, EventArgs e)
         {
-            txtC.Text = text;
+            txtC.Text = _text;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -292,7 +292,7 @@ ins.mod {
         private void Shield(bool exceptSpecial)
         {
             txtC.Text = string.Empty;
-            var array = text.ToCharArray();
+            var array = _text.ToCharArray();
 
             foreach (var item in array)
             {
@@ -379,7 +379,7 @@ ins.mod {
         {
             var list = dataGridView1.DataSource as BindingList<TCore>;
             var data = list[e.RowIndex];
-            text = txtC.Text = data.SContent;
+            _text = txtC.Text = data.SContent;
         }
 
         private void tsmiLook4Topic_Click(object sender, EventArgs e)
@@ -458,16 +458,16 @@ ins.mod {
 
         private void btnCompare_Click(object sender, EventArgs e)
         {
-            HtmlDiff.HtmlDiff diffHelper = new HtmlDiff.HtmlDiff(txtC.Text, txtMyText.Text);
+            HtmlDiff.HtmlDiff diffHelper = new HtmlDiff.HtmlDiff(_text, txtMyText.Text);
             //litOldText.Text = oldText;
             //litNewText.Text = newText;
 
             // Lets add a block expression to group blocks we care about (such as dates)
             diffHelper.AddBlockExpression(new Regex(@"[\d]{1,2}[\s]*(Jan|Feb)[\s]*[\d]{4}", RegexOptions.IgnoreCase));
-            var text = diffHelper.Build();
-         text=   text.Replace("\r\n", "<br/>");
-            webBrowser1.Document.Body.InnerHtml = text;
-        
+            var compareText = diffHelper.Build();
+            compareText = compareText.Replace("\r\n", "<br/>");
+            webBrowser1.Document.Body.InnerHtml = compareText;
+
         }
 
 

@@ -19,5 +19,8 @@ namespace Dal
         public string Title { get; set; }
         public string QuizzesGroupId { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
+        public Nullable<System.DateTime> UpdateDate { get; set; }
+        public Nullable<bool> Comp { get; set; }
+        public Nullable<int> AnswerCount { get; set; }
     }
 }
