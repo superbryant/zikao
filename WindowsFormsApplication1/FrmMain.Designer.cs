@@ -49,6 +49,8 @@
             this.tsmiGraphicCalc = new System.Windows.Forms.ToolStripMenuItem();
             this.科目ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAddSubject = new System.Windows.Forms.ToolStripMenuItem();
+            this.复习ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiBuildPlan = new System.Windows.Forms.ToolStripMenuItem();
             this.cboSubject = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -219,7 +221,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.工具ToolStripMenuItem,
-            this.科目ToolStripMenuItem});
+            this.科目ToolStripMenuItem,
+            this.复习ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1009, 25);
@@ -280,6 +283,21 @@
             this.tsmiAddSubject.Text = "添加科目";
             this.tsmiAddSubject.Click += new System.EventHandler(this.tsmiAddSubject_Click);
             // 
+            // 复习ToolStripMenuItem
+            // 
+            this.复习ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiBuildPlan});
+            this.复习ToolStripMenuItem.Name = "复习ToolStripMenuItem";
+            this.复习ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.复习ToolStripMenuItem.Text = "复习";
+            // 
+            // tsmiBuildPlan
+            // 
+            this.tsmiBuildPlan.Name = "tsmiBuildPlan";
+            this.tsmiBuildPlan.Size = new System.Drawing.Size(148, 22);
+            this.tsmiBuildPlan.Text = "生成复习计划";
+            this.tsmiBuildPlan.Click += new System.EventHandler(this.tsmiBuildPlan_Click);
+            // 
             // cboSubject
             // 
             this.cboSubject.FormattingEnabled = true;
@@ -287,7 +305,6 @@
             this.cboSubject.Name = "cboSubject";
             this.cboSubject.Size = new System.Drawing.Size(195, 20);
             this.cboSubject.TabIndex = 13;
-            this.cboSubject.SelectedIndexChanged += new System.EventHandler(this.cboSubject_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -314,7 +331,6 @@
             this.cboChapter.Name = "cboChapter";
             this.cboChapter.Size = new System.Drawing.Size(195, 20);
             this.cboChapter.TabIndex = 12;
-            this.cboChapter.SelectedIndexChanged += new System.EventHandler(this.cboChapter_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -332,7 +348,6 @@
             this.cboSection.Name = "cboSection";
             this.cboSection.Size = new System.Drawing.Size(195, 20);
             this.cboSection.TabIndex = 11;
-            this.cboSection.SelectedIndexChanged += new System.EventHandler(this.cboSection_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -532,7 +547,7 @@
             this.Controls.Add(this.btnX1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmMain";
-            this.Text = "认真、专注——追求100分";
+            this.Text = "做对、熟练、融会贯通|认真、专注——追求100分";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -602,6 +617,8 @@
         private System.Windows.Forms.Button btnCompare;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.ToolStripMenuItem 复习ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiBuildPlan;
     }
 }
 

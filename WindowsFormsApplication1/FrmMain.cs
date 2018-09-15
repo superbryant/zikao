@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApplication1.Controls;
+using WindowsFormsApplication1.Models;
 
 namespace WindowsFormsApplication1
 {
@@ -27,6 +28,9 @@ namespace WindowsFormsApplication1
             LoadData();
             ProtectEye(Controls);
             loding = false;
+            this.cboChapter.SelectedIndexChanged += new System.EventHandler(this.cboChapter_SelectedIndexChanged);
+            this.cboSection.SelectedIndexChanged += new System.EventHandler(this.cboSection_SelectedIndexChanged);
+            this.cboSubject.SelectedIndexChanged += new System.EventHandler(this.cboSubject_SelectedIndexChanged);
         }
 
         private void LoadData()
@@ -157,7 +161,7 @@ ins.mod {
             if (chkCurSubject.Checked)
             {
                 var subject = cboSubject.SelectedItem as Subject;
-                where = f => f.SCode.Contains(subject.Code);
+                where = f => f.SCode.StartsWith(subject.Code);
             }
             var topics = EFRepository<TCore>.Instance.LoadEntities(where);
             dataGridView1.AutoGenerateColumns = false;
@@ -468,6 +472,80 @@ ins.mod {
             compareText = compareText.Replace("\r\n", "<br/>");
             webBrowser1.Document.Body.InnerHtml = compareText;
 
+        }
+
+        private void tsmiBuildPlan_Click(object sender, EventArgs e)
+        {
+            List<ReviewModel> list = new List<ReviewModel>() {
+                new  ReviewModel(){
+                 ContinuousDays=3,
+                  Name="近现代史",
+                   PerDayChapter=3,
+                    TotalChapter=9,
+                },
+                           new  ReviewModel(){
+                 ContinuousDays=1,
+                  Name="项目风险管理",
+                   PerDayChapter=2,
+                    TotalChapter=6,
+                },
+                           new  ReviewModel(){
+                 ContinuousDays=3,
+                  Name="办公室管理",
+                   PerDayChapter=2,
+                    TotalChapter=9,
+                },
+                           new  ReviewModel(){
+                 ContinuousDays=2,
+                  Name="能源管理概论",
+                   PerDayChapter=3,
+                    TotalChapter=7,
+                },
+                           new  ReviewModel(){
+                 ContinuousDays=1,
+                  Name="节能评估",
+                   PerDayChapter=2,
+                    TotalChapter=5,
+                },
+                           new  ReviewModel(){
+                 ContinuousDays=1,
+                  Name="项目范围管理",
+                   PerDayChapter=2,
+                    TotalChapter=6,
+                },
+            };
+            StringBuilder sb = new StringBuilder();
+            string reviewLine = "科目\t章节\t日期";
+            sb.AppendLine(reviewLine);
+            string reviewLineFormat = "{0}\t{1}\t{2}\r\n";
+            
+            DateTime dt=DateTime.Now.AddDays(1);
+            while (dt<new DateTime(2018,10,6))
+            {
+                
+           
+            foreach (var item in list)
+            {
+                for (int i = 0; i < item.ContinuousDays; i++)
+                {
+                    
+                    for (int j = 0; j < item.PerDayChapter; j++)
+                    {
+                        if (item.LastChapter + 1 > item.TotalChapter) {
+                            item.LastChapter = 0;
+                        }
+                        item.LastChapter ++;
+
+                        sb.AppendFormat(reviewLineFormat, item.Name, "第" + (item.LastChapter) + "章", dt.ToString("yyyy-MM-dd"));
+
+                    }
+                  dt=  dt.AddDays(1);
+                }
+            }
+            
+            }
+            var s = sb.ToString();
+            LogHelper.Ins.Info(s);
         }
 
 

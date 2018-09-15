@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="LogHelper.cs" />
     <Compile Include="Models\PostUserJson.cs" />
+    <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\UserJson.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
