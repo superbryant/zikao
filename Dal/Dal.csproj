@@ -54,6 +54,10 @@
     <Compile Include="Question.cs">
       <DependentUpon>ZiKao.tt</DependentUpon>
     </Compile>
+    <Compile Include="TAttachment.cs">
+      <DependentUpon>ZiKao.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TAttachmentDAL.cs" />
     <Compile Include="SqlHelper.cs" />
     <Compile Include="Subject.cs">
       <DependentUpon>ZiKao.tt</DependentUpon>

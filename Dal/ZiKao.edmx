@@ -30,6 +30,23 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="TAttachment">
+          <Key>
+            <PropertyRef Name="AutoId" />
+          </Key>
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="batchId" Type="varchar" MaxLength="50" />
+          <Property Name="businessId" Type="bigint" />
+          <Property Name="businessType" Type="int" />
+          <Property Name="createTime" Type="datetime" />
+          <Property Name="creator" Type="varchar" MaxLength="50" />
+          <Property Name="downloadTimes" Type="int" />
+          <Property Name="fileName" Type="nvarchar" MaxLength="250" />
+          <Property Name="fileSize" Type="varchar" MaxLength="50" />
+          <Property Name="fileUrl" Type="varchar" MaxLength="500" />
+          <Property Name="record" Type="varchar" MaxLength="50" />
+          <Property Name="id" Type="int" />
+        </EntityType>
         <EntityType Name="TCore">
           <Key>
             <PropertyRef Name="Id" />
@@ -107,6 +124,7 @@
         <EntityContainer Name="ZiKaoModelStoreContainer">
           <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAttachment" EntityType="Self.TAttachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TCore" EntityType="Self.TCore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIssue" EntityType="Self.TIssue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIssueSubject" EntityType="Self.TIssueSubject" Schema="dbo" store:Type="Tables" />
@@ -179,6 +197,7 @@
           <EntitySet Name="VipUsers" EntityType="ZiKaoModel.VipUsers" />
           <EntitySet Name="Topic" EntityType="ZiKaoModel.Topic" />
           <EntitySet Name="Question" EntityType="ZiKaoModel.Question" />
+          <EntitySet Name="TAttachment" EntityType="ZiKaoModel.TAttachment" />
         </EntityContainer>
         <EntityType Name="Users">
           <Key>
@@ -232,6 +251,23 @@
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="Comp" Type="Boolean" />
           <Property Name="AnswerCount" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TAttachment">
+          <Key>
+            <PropertyRef Name="AutoId" />
+          </Key>
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="batchId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="businessId" Type="Int64" />
+          <Property Name="businessType" Type="Int32" />
+          <Property Name="createTime" Type="DateTime" Precision="3" />
+          <Property Name="creator" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="downloadTimes" Type="Int32" />
+          <Property Name="fileName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="fileSize" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fileUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="record" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -341,6 +377,24 @@
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="NewUrl" ColumnName="NewUrl" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAttachment">
+            <EntityTypeMapping TypeName="ZiKaoModel.TAttachment">
+              <MappingFragment StoreEntitySet="TAttachment">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="record" ColumnName="record" />
+                <ScalarProperty Name="fileUrl" ColumnName="fileUrl" />
+                <ScalarProperty Name="fileSize" ColumnName="fileSize" />
+                <ScalarProperty Name="fileName" ColumnName="fileName" />
+                <ScalarProperty Name="downloadTimes" ColumnName="downloadTimes" />
+                <ScalarProperty Name="creator" ColumnName="creator" />
+                <ScalarProperty Name="createTime" ColumnName="createTime" />
+                <ScalarProperty Name="businessType" ColumnName="businessType" />
+                <ScalarProperty Name="businessId" ColumnName="businessId" />
+                <ScalarProperty Name="batchId" ColumnName="batchId" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

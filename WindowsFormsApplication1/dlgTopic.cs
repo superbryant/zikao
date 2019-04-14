@@ -84,7 +84,7 @@ namespace WindowsFormsApplication1
                 {
                     LogHelper.Ins.Error(ex);
                 }
-            } while (retry < 50);
+            } while (retry < 300);
 
             MessageBox.Show("采集完了");
         }

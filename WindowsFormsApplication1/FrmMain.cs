@@ -220,6 +220,7 @@ ins.mod {
             });
 
             LoadGreateGreatChild();
+            dataGridView1.Rows[dataGridView1.RowCount-1].Cells[0].Selected = true;
         }
 
         private string GetTitle(string text)
@@ -367,11 +368,7 @@ ins.mod {
             LoadData();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-
-        }
+    
 
         private void tsmiAddSubject_Click(object sender, EventArgs e)
         {
@@ -382,8 +379,11 @@ ins.mod {
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             var list = dataGridView1.DataSource as BindingList<TCore>;
-            var data = list[e.RowIndex];
-            _text = txtC.Text = data.SContent;
+            if (e.RowIndex != -1)
+            {
+                var data = list[e.RowIndex];
+                _text = txtC.Text = data.SContent;
+            }
         }
 
         private void tsmiLook4Topic_Click(object sender, EventArgs e)
@@ -462,7 +462,7 @@ ins.mod {
 
         private void btnCompare_Click(object sender, EventArgs e)
         {
-            HtmlDiff.HtmlDiff diffHelper = new HtmlDiff.HtmlDiff(_text, txtMyText.Text);
+            HtmlDiff.HtmlDiff diffHelper = new HtmlDiff.HtmlDiff(txtMyText.Text, _text);
             //litOldText.Text = oldText;
             //litNewText.Text = newText;
 
@@ -477,42 +477,67 @@ ins.mod {
         private void tsmiBuildPlan_Click(object sender, EventArgs e)
         {
             List<ReviewModel> list = new List<ReviewModel>() {
-                new  ReviewModel(){
-                 ContinuousDays=3,
-                  Name="近现代史",
-                   PerDayChapter=3,
-                    TotalChapter=9,
-                },
-                           new  ReviewModel(){
+                //new  ReviewModel(){
+                // ContinuousDays=3,
+                //  Name="近现代史",
+                //   PerDayChapter=3,
+                //    TotalChapter=9,
+                //},
+                //           new  ReviewModel(){
+                // ContinuousDays=1,
+                //  Name="项目风险管理",
+                //   PerDayChapter=2,
+                //    TotalChapter=6,
+                //},
+                //           new  ReviewModel(){
+                // ContinuousDays=3,
+                //  Name="办公室管理",
+                //   PerDayChapter=2,
+                //    TotalChapter=9,
+                //},
+                 new  ReviewModel(){
                  ContinuousDays=1,
-                  Name="项目风险管理",
-                   PerDayChapter=2,
-                    TotalChapter=6,
-                },
-                           new  ReviewModel(){
-                 ContinuousDays=3,
-                  Name="办公室管理",
-                   PerDayChapter=2,
-                    TotalChapter=9,
+                  Name="007er",
+                   PerDayChapter=1,
+                    TotalChapter=52,
                 },
                            new  ReviewModel(){
                  ContinuousDays=2,
-                  Name="能源管理概论",
-                   PerDayChapter=3,
-                    TotalChapter=7,
+                  Name="管理信息的收集与处理",
+                   PerDayChapter=2,
+                    TotalChapter=10,
+                },
+                           new  ReviewModel(){
+                 ContinuousDays=2,
+                  Name="能源工程技术概论（一）",
+                   PerDayChapter=2,
+                    TotalChapter=9,
+                },
+                                  new  ReviewModel(){
+                 ContinuousDays=1,
+                  Name="项目成本管理",
+                   PerDayChapter=2,
+                    TotalChapter=8,
                 },
                            new  ReviewModel(){
                  ContinuousDays=1,
-                  Name="节能评估",
+                  Name="现代项目质量管理",
                    PerDayChapter=2,
-                    TotalChapter=5,
+                    TotalChapter=8,
                 },
-                           new  ReviewModel(){
-                 ContinuousDays=1,
-                  Name="项目范围管理",
-                   PerDayChapter=2,
-                    TotalChapter=6,
-                },
+                //                  new  ReviewModel(){
+                // ContinuousDays=1,
+                //  Name="法规",
+                //   PerDayChapter=3,
+                //    TotalChapter=6,
+                //},
+                   
+                //           new  ReviewModel(){
+                // ContinuousDays=1,
+                //  Name="项目范围管理",
+                //   PerDayChapter=2,
+                //    TotalChapter=6,
+                //},
             };
             StringBuilder sb = new StringBuilder();
             string reviewLine = "科目\t章节\t日期";
@@ -520,7 +545,7 @@ ins.mod {
             string reviewLineFormat = "{0}\t{1}\t{2}\r\n";
             
             DateTime dt=DateTime.Now.AddDays(1);
-            while (dt<new DateTime(2018,10,6))
+            while (dt<new DateTime(2019,4,1))
             {
                 
            
@@ -546,6 +571,13 @@ ins.mod {
             }
             var s = sb.ToString();
             LogHelper.Ins.Info(s);
+        }
+
+        private void tsmiDownAttachment_Click(object sender, EventArgs e)
+        {
+
+            dlgAttachment dlgGraphicCalc = new dlgAttachment();
+            dlgGraphicCalc.Show();
         }
 
 

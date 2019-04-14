@@ -72,6 +72,7 @@
             this.btnCompare = new System.Windows.Forms.Button();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.tsmiDownAttachment = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -235,7 +236,8 @@
             this.tsmiReplaceImg,
             this.tsmiLook4Topic,
             this.tsmiUsers,
-            this.tsmiGraphicCalc});
+            this.tsmiGraphicCalc,
+            this.tsmiDownAttachment});
             this.工具ToolStripMenuItem.Name = "工具ToolStripMenuItem";
             this.工具ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.工具ToolStripMenuItem.Text = "工具";
@@ -243,28 +245,28 @@
             // tsmiReplaceImg
             // 
             this.tsmiReplaceImg.Name = "tsmiReplaceImg";
-            this.tsmiReplaceImg.Size = new System.Drawing.Size(148, 22);
+            this.tsmiReplaceImg.Size = new System.Drawing.Size(152, 22);
             this.tsmiReplaceImg.Text = "替换宝典图片";
             this.tsmiReplaceImg.Click += new System.EventHandler(this.tsmiReplaceImg_Click);
             // 
             // tsmiLook4Topic
             // 
             this.tsmiLook4Topic.Name = "tsmiLook4Topic";
-            this.tsmiLook4Topic.Size = new System.Drawing.Size(148, 22);
+            this.tsmiLook4Topic.Size = new System.Drawing.Size(152, 22);
             this.tsmiLook4Topic.Text = "找题目";
             this.tsmiLook4Topic.Click += new System.EventHandler(this.tsmiLook4Topic_Click);
             // 
             // tsmiUsers
             // 
             this.tsmiUsers.Name = "tsmiUsers";
-            this.tsmiUsers.Size = new System.Drawing.Size(148, 22);
+            this.tsmiUsers.Size = new System.Drawing.Size(152, 22);
             this.tsmiUsers.Text = "采集所有用户";
             this.tsmiUsers.Click += new System.EventHandler(this.tsmiUsers_Click);
             // 
             // tsmiGraphicCalc
             // 
             this.tsmiGraphicCalc.Name = "tsmiGraphicCalc";
-            this.tsmiGraphicCalc.Size = new System.Drawing.Size(148, 22);
+            this.tsmiGraphicCalc.Size = new System.Drawing.Size(152, 22);
             this.tsmiGraphicCalc.Text = "图例计算";
             this.tsmiGraphicCalc.Click += new System.EventHandler(this.tsmiGraphicCalc_Click);
             // 
@@ -425,7 +427,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(268, 376);
             this.dataGridView1.TabIndex = 10;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Column1
             // 
@@ -516,6 +517,13 @@
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(707, 209);
             this.webBrowser1.TabIndex = 0;
+            // 
+            // tsmiDownAttachment
+            // 
+            this.tsmiDownAttachment.Name = "tsmiDownAttachment";
+            this.tsmiDownAttachment.Size = new System.Drawing.Size(152, 22);
+            this.tsmiDownAttachment.Text = "下载课件";
+            this.tsmiDownAttachment.Click += new System.EventHandler(this.tsmiDownAttachment_Click);
             // 
             // FrmMain
             // 
@@ -619,6 +627,7 @@
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.ToolStripMenuItem 复习ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmiBuildPlan;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDownAttachment;
     }
 }
 

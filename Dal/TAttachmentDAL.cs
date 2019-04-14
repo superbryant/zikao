@@ -6,45 +6,45 @@ using System.Threading.Tasks;
 
 namespace Dal
 {
-    public class QuestionDAL : EFRepository<Question>
+    public class TAttachmentDAL : EFRepository<TAttachment>
     {
 
-        public int GetMaxQuestionId()
+        public int GetMaxTAttachmentId()
         {
             using (ZiKaoEntities entities = new ZiKaoEntities())
             {
-                var max = entities.Question.OrderByDescending(f=>f.Id).Take(1).FirstOrDefault();
+                var max = entities.TAttachment.OrderByDescending(f => f.AutoId).Take(1).FirstOrDefault();
                 if (max == null)
                 {
                     return 0;
                 }
                 else
                 {
-                    return Convert.ToInt32(max.QuizzesGroupId);
+                    return Convert.ToInt32(max.businessId);
                 }
             }
         }
 
-        public List<Question> GetQuestion(int take)
+        public List<TAttachment> GetTAttachment(int take)
         {
             using (ZiKaoEntities entities = new ZiKaoEntities())
             {
-                var list = entities.Question.Where(f => f.Title != "").OrderByDescending(f => f.Id).Take(take);
+                var list = entities.TAttachment.Where(f => f.fileName != "").OrderByDescending(f => f.AutoId).Take(take);
                 return list.ToList();
             }
         }
 
-        public List<Question> GetQuestion(string search, int take)
+        public List<TAttachment> GetTAttachment(string search, int take)
         {
             using (ZiKaoEntities entities = new ZiKaoEntities())
             {
-                var query = entities.Question.Where(f => true);
+                var query = entities.TAttachment.Where(f => true);
                var seaches= search.Split(new string[]{" "}, StringSplitOptions.RemoveEmptyEntries);
                foreach (var item in seaches)
                 {
-                    query = query.Where(f => f.Title.Contains(item));
+                    query = query.Where(f => f.fileName.Contains(item));
                 }
-                var list =query.OrderByDescending(f => f.Id).Take(take);
+                var list =query.OrderByDescending(f => f.AutoId).Take(take);
                 return list.ToList();
             }
         }
@@ -53,7 +53,7 @@ namespace Dal
         {
             using (ZiKaoEntities entities = new ZiKaoEntities())
             {
-                string sql = @"UPDATE [dbo].[Question]
+                string sql = @"UPDATE [dbo].[TAttachment]
    SET  [Comp] = 1
       ,[UpdateDate] =getdate()
  WHERE  QuizzesGroupId=" + id;

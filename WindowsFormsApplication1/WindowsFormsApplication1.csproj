@@ -82,6 +82,12 @@
     <Compile Include="DlgReplaceImg.Designer.cs">
       <DependentUpon>DlgReplaceImg.cs</DependentUpon>
     </Compile>
+    <Compile Include="dlgAttachment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgAttachment.Designer.cs">
+      <DependentUpon>dlgAttachment.cs</DependentUpon>
+    </Compile>
     <Compile Include="dlgTopic.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,7 @@
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="LogHelper.cs" />
+    <Compile Include="Models\AttachmentJson.cs" />
     <Compile Include="Models\PostUserJson.cs" />
     <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\UserJson.cs" />
@@ -108,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DlgReplaceImg.resx">
       <DependentUpon>DlgReplaceImg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAttachment.resx">
+      <DependentUpon>dlgAttachment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTopic.resx">
       <DependentUpon>dlgTopic.cs</DependentUpon>
