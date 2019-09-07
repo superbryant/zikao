@@ -53,6 +53,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,6 +70,12 @@
     </Compile>
     <Compile Include="DlgAddSubjet.Designer.cs">
       <DependentUpon>DlgAddSubjet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DlgAnalysis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DlgAnalysis.Designer.cs">
+      <DependentUpon>DlgAnalysis.cs</DependentUpon>
     </Compile>
     <Compile Include="DlgGraphicCalc.cs">
       <SubType>Form</SubType>
@@ -94,22 +101,35 @@
     <Compile Include="dlgTopic.Designer.cs">
       <DependentUpon>dlgTopic.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dlg51ctoCatalog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dlg51ctoCatalog.Designer.cs">
+      <DependentUpon>Dlg51ctoCatalog.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="HtmlBuilder.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="Models\AttachmentJson.cs" />
     <Compile Include="Models\PostUserJson.cs" />
     <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\UserJson.cs" />
-    <Compile Include="NewFolder1\Class1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util.cs" />
+    <EmbeddedResource Include="Dlg51ctoCatalog.resx">
+      <DependentUpon>Dlg51ctoCatalog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DlgAddSubjet.resx">
       <DependentUpon>DlgAddSubjet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgAnalysis.resx">
+      <DependentUpon>DlgAnalysis.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DlgGraphicCalc.resx">
       <DependentUpon>DlgGraphicCalc.cs</DependentUpon>
@@ -162,6 +182,9 @@
     <Content Include="Lib\HtmlDiff.dll" />
     <Content Include="Lib\HtmlDiff.pdb" />
     <Content Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

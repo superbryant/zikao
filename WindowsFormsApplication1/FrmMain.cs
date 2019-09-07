@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -216,26 +217,14 @@ ins.mod {
                 FStatus = true,
                 SCode = cboSection.SelectedValue.ToString(),
                 SContent = _text,
-                Title = GetTitle(_text)
+                Title = Util.GetTitle(_text)
             });
 
             LoadGreateGreatChild();
-            dataGridView1.Rows[dataGridView1.RowCount-1].Cells[0].Selected = true;
+            dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[0].Selected = true;
         }
 
-        private string GetTitle(string text)
-        {
-            var defaultFliter = "\r\n，。☆、：…,.?？!！";
-            var charArray = text.ToArray();
-            for (int i = 0; i < charArray.Length; i++)
-            {
-                if (defaultFliter.Contains(charArray[i]))
-                {
-                    return text.Substring(0, i);
-                }
-            }
-            return text;
-        }
+   
 
         private void btnX1_Click(object sender, EventArgs e)
         {
@@ -368,7 +357,7 @@ ins.mod {
             LoadData();
         }
 
-    
+
 
         private void tsmiAddSubject_Click(object sender, EventArgs e)
         {
@@ -382,7 +371,16 @@ ins.mod {
             if (e.RowIndex != -1)
             {
                 var data = list[e.RowIndex];
-                _text = txtC.Text = data.SContent;
+                if (data.Title.StartsWith("[h]"))
+                {
+                    webBrowser1.Document.Body.InnerHtml = data.SContent;
+                    _text = txtC.Text = webBrowser1.Document.Body.InnerText;
+                }
+                else
+                {
+                    _text = txtC.Text = data.SContent;
+                }
+
             }
         }
 
@@ -543,31 +541,32 @@ ins.mod {
             string reviewLine = "科目\t章节\t日期";
             sb.AppendLine(reviewLine);
             string reviewLineFormat = "{0}\t{1}\t{2}\r\n";
-            
-            DateTime dt=DateTime.Now.AddDays(1);
-            while (dt<new DateTime(2019,4,1))
+
+            DateTime dt = DateTime.Now.AddDays(1);
+            while (dt < new DateTime(2019, 4, 1))
             {
-                
-           
-            foreach (var item in list)
-            {
-                for (int i = 0; i < item.ContinuousDays; i++)
+
+
+                foreach (var item in list)
                 {
-                    
-                    for (int j = 0; j < item.PerDayChapter; j++)
+                    for (int i = 0; i < item.ContinuousDays; i++)
                     {
-                        if (item.LastChapter + 1 > item.TotalChapter) {
-                            item.LastChapter = 0;
+
+                        for (int j = 0; j < item.PerDayChapter; j++)
+                        {
+                            if (item.LastChapter + 1 > item.TotalChapter)
+                            {
+                                item.LastChapter = 0;
+                            }
+                            item.LastChapter++;
+
+                            sb.AppendFormat(reviewLineFormat, item.Name, "第" + (item.LastChapter) + "章", dt.ToString("yyyy-MM-dd"));
+
                         }
-                        item.LastChapter ++;
-
-                        sb.AppendFormat(reviewLineFormat, item.Name, "第" + (item.LastChapter) + "章", dt.ToString("yyyy-MM-dd"));
-
+                        dt = dt.AddDays(1);
                     }
-                  dt=  dt.AddDays(1);
                 }
-            }
-            
+
             }
             var s = sb.ToString();
             LogHelper.Ins.Info(s);
@@ -578,6 +577,96 @@ ins.mod {
 
             dlgAttachment dlgGraphicCalc = new dlgAttachment();
             dlgGraphicCalc.Show();
+        }
+
+        private void tsmiBuildCatalog_Click(object sender, EventArgs e)
+        {
+            Dlg51ctoCatalog dlg51ctoCatalog = new Dlg51ctoCatalog();
+            dlg51ctoCatalog.ShowDialog();
+        }
+
+        private void tsmi添加知识点_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSaveHtml_Click(object sender, EventArgs e)
+        {
+
+            if (ValidateInput() == false)
+                return;
+            var html = txtC.Text;
+            html = Regex.Replace(html, @"<title>[\s\S]*?</form>", "");
+            html = Regex.Replace(html, "&nbsp;", "");
+            html = Regex.Replace(html, "<br.*?>", "</p><p>");
+            html = Regex.Replace(html, "<div", "<p");
+            html = Regex.Replace(html, "</div>", "</p>");
+            html = Regex.Replace(html, @"\s+", " ");
+
+            html = Regex.Replace(html, "<span", "<p");
+            html = Regex.Replace(html, "</span>", "</p>");
+
+            //_text = txtC.Text;
+
+            webBrowser1.Document.Body.InnerHtml = html;
+
+            var innerText = webBrowser1.Document.Body.InnerText;
+
+            if (string.IsNullOrEmpty(innerText))
+            {
+                innerText = "找不到内容";
+            }
+            else
+            {
+                innerText = innerText.Trim();
+            }
+            _text = txtC.Text = innerText;
+
+            var core = new TCore()
+              {
+                  CreateDate = DateTime.Now,
+                  FStatus = true,
+                  SCode = cboSection.SelectedValue.ToString(),
+                  SContent = html,
+
+                  Title = "[h]" + Util.GetTitle(innerText)
+              };
+            EFRepository<TCore>.Instance.AddEntity(core);
+
+            LoadGreateGreatChild();
+            dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[0].Selected = true;
+        }
+
+        private void btnBuildHtml_Click(object sender, EventArgs e)
+        {
+            var sRows = dataGridView1.SelectedRows;
+            if (sRows.Count == 0)
+            {
+                MessageBox.Show("请选择要生成的左侧列表项", "提示");
+                return;
+            }
+            HtmlBuilder hb = new HtmlBuilder();
+            foreach (DataGridViewRow item in sRows)
+            {
+                var tcore = item.DataBoundItem as TCore;
+                hb.AddBodyItem(tcore.Title, tcore.SContent);
+            }
+
+      var html=      hb.Build();
+        }
+
+     
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void 获取解析ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DlgAnalysis dlg = new DlgAnalysis();
+            dlg.ShowDialog();
+
         }
 
 
