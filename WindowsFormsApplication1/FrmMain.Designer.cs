@@ -56,6 +56,8 @@
             this.cTOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.获取解析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiBuildCatalog = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi = new System.Windows.Forms.ToolStripMenuItem();
+            this.重新整理pdfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cboSubject = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -76,9 +78,13 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnCompare = new System.Windows.Forms.Button();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tstl = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.btnSaveHtml = new System.Windows.Forms.Button();
             this.btnBuildHtml = new System.Windows.Forms.Button();
+            this.生成错题解析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -95,6 +101,7 @@
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnX1
@@ -230,7 +237,8 @@
             this.工具ToolStripMenuItem,
             this.科目ToolStripMenuItem,
             this.复习ToolStripMenuItem,
-            this.cTOToolStripMenuItem});
+            this.cTOToolStripMenuItem,
+            this.tsmi});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1009, 25);
@@ -252,35 +260,35 @@
             // tsmiReplaceImg
             // 
             this.tsmiReplaceImg.Name = "tsmiReplaceImg";
-            this.tsmiReplaceImg.Size = new System.Drawing.Size(152, 22);
+            this.tsmiReplaceImg.Size = new System.Drawing.Size(148, 22);
             this.tsmiReplaceImg.Text = "替换宝典图片";
             this.tsmiReplaceImg.Click += new System.EventHandler(this.tsmiReplaceImg_Click);
             // 
             // tsmiLook4Topic
             // 
             this.tsmiLook4Topic.Name = "tsmiLook4Topic";
-            this.tsmiLook4Topic.Size = new System.Drawing.Size(152, 22);
+            this.tsmiLook4Topic.Size = new System.Drawing.Size(148, 22);
             this.tsmiLook4Topic.Text = "找题目";
             this.tsmiLook4Topic.Click += new System.EventHandler(this.tsmiLook4Topic_Click);
             // 
             // tsmiUsers
             // 
             this.tsmiUsers.Name = "tsmiUsers";
-            this.tsmiUsers.Size = new System.Drawing.Size(152, 22);
+            this.tsmiUsers.Size = new System.Drawing.Size(148, 22);
             this.tsmiUsers.Text = "采集所有用户";
             this.tsmiUsers.Click += new System.EventHandler(this.tsmiUsers_Click);
             // 
             // tsmiGraphicCalc
             // 
             this.tsmiGraphicCalc.Name = "tsmiGraphicCalc";
-            this.tsmiGraphicCalc.Size = new System.Drawing.Size(152, 22);
+            this.tsmiGraphicCalc.Size = new System.Drawing.Size(148, 22);
             this.tsmiGraphicCalc.Text = "图例计算";
             this.tsmiGraphicCalc.Click += new System.EventHandler(this.tsmiGraphicCalc_Click);
             // 
             // tsmiDownAttachment
             // 
             this.tsmiDownAttachment.Name = "tsmiDownAttachment";
-            this.tsmiDownAttachment.Size = new System.Drawing.Size(152, 22);
+            this.tsmiDownAttachment.Size = new System.Drawing.Size(148, 22);
             this.tsmiDownAttachment.Text = "下载课件";
             this.tsmiDownAttachment.Click += new System.EventHandler(this.tsmiDownAttachment_Click);
             // 
@@ -296,14 +304,14 @@
             // tsmiAddSubject
             // 
             this.tsmiAddSubject.Name = "tsmiAddSubject";
-            this.tsmiAddSubject.Size = new System.Drawing.Size(152, 22);
+            this.tsmiAddSubject.Size = new System.Drawing.Size(136, 22);
             this.tsmiAddSubject.Text = "添加科目";
             this.tsmiAddSubject.Click += new System.EventHandler(this.tsmiAddSubject_Click);
             // 
             // tsmi添加知识点
             // 
             this.tsmi添加知识点.Name = "tsmi添加知识点";
-            this.tsmi添加知识点.Size = new System.Drawing.Size(152, 22);
+            this.tsmi添加知识点.Size = new System.Drawing.Size(136, 22);
             this.tsmi添加知识点.Text = "添加知识点";
             this.tsmi添加知识点.Click += new System.EventHandler(this.tsmi添加知识点_Click);
             // 
@@ -318,7 +326,7 @@
             // tsmiBuildPlan
             // 
             this.tsmiBuildPlan.Name = "tsmiBuildPlan";
-            this.tsmiBuildPlan.Size = new System.Drawing.Size(152, 22);
+            this.tsmiBuildPlan.Size = new System.Drawing.Size(148, 22);
             this.tsmiBuildPlan.Text = "生成复习计划";
             this.tsmiBuildPlan.Click += new System.EventHandler(this.tsmiBuildPlan_Click);
             // 
@@ -334,15 +342,31 @@
             // 获取解析ToolStripMenuItem
             // 
             this.获取解析ToolStripMenuItem.Name = "获取解析ToolStripMenuItem";
-            this.获取解析ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.获取解析ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.获取解析ToolStripMenuItem.Text = "获取解析";
             this.获取解析ToolStripMenuItem.Click += new System.EventHandler(this.获取解析ToolStripMenuItem_Click);
             // 
             // tsmiBuildCatalog
             // 
             this.tsmiBuildCatalog.Name = "tsmiBuildCatalog";
-            this.tsmiBuildCatalog.Size = new System.Drawing.Size(152, 22);
+            this.tsmiBuildCatalog.Size = new System.Drawing.Size(124, 22);
             this.tsmiBuildCatalog.Text = "生成目录";
+            // 
+            // tsmi
+            // 
+            this.tsmi.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.重新整理pdfToolStripMenuItem,
+            this.生成错题解析ToolStripMenuItem});
+            this.tsmi.Name = "tsmi";
+            this.tsmi.Size = new System.Drawing.Size(56, 21);
+            this.tsmi.Text = "信管网";
+            // 
+            // 重新整理pdfToolStripMenuItem
+            // 
+            this.重新整理pdfToolStripMenuItem.Name = "重新整理pdfToolStripMenuItem";
+            this.重新整理pdfToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.重新整理pdfToolStripMenuItem.Text = "重新整理pdf";
+            this.重新整理pdfToolStripMenuItem.Click += new System.EventHandler(this.重新整理pdfToolStripMenuItem_Click);
             // 
             // cboSubject
             // 
@@ -550,10 +574,32 @@
             // 
             // splitContainer3.Panel2
             // 
+            this.splitContainer3.Panel2.Controls.Add(this.statusStrip1);
             this.splitContainer3.Panel2.Controls.Add(this.webBrowser1);
             this.splitContainer3.Size = new System.Drawing.Size(707, 483);
             this.splitContainer3.SplitterDistance = 270;
             this.splitContainer3.TabIndex = 17;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tstl,
+            this.statusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 187);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(707, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tstl
+            // 
+            this.tstl.Name = "tstl";
+            this.tstl.Size = new System.Drawing.Size(0, 17);
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // webBrowser1
             // 
@@ -583,6 +629,13 @@
             this.btnBuildHtml.Text = "生产Html";
             this.btnBuildHtml.UseVisualStyleBackColor = true;
             this.btnBuildHtml.Click += new System.EventHandler(this.btnBuildHtml_Click);
+            // 
+            // 生成错题解析ToolStripMenuItem
+            // 
+            this.生成错题解析ToolStripMenuItem.Name = "生成错题解析ToolStripMenuItem";
+            this.生成错题解析ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.生成错题解析ToolStripMenuItem.Text = "生成错题解析";
+            this.生成错题解析ToolStripMenuItem.Click += new System.EventHandler(this.生成错题解析ToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -636,8 +689,11 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
+            this.splitContainer3.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -695,6 +751,12 @@
         private System.Windows.Forms.ToolStripMenuItem cTOToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 获取解析ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmiBuildCatalog;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel tstl;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
+        private System.Windows.Forms.ToolStripMenuItem tsmi;
+        private System.Windows.Forms.ToolStripMenuItem 重新整理pdfToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 生成错题解析ToolStripMenuItem;
     }
 }
 

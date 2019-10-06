@@ -114,7 +114,6 @@
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="HtmlBuilder.cs" />
-    <Compile Include="LogHelper.cs" />
     <Compile Include="Models\AttachmentJson.cs" />
     <Compile Include="Models\PostUserJson.cs" />
     <Compile Include="Models\ReviewModel.cs" />

@@ -224,7 +224,7 @@ ins.mod {
             dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[0].Selected = true;
         }
 
-   
+
 
         private void btnX1_Click(object sender, EventArgs e)
         {
@@ -631,10 +631,16 @@ ins.mod {
 
                   Title = "[h]" + Util.GetTitle(innerText)
               };
-            EFRepository<TCore>.Instance.AddEntity(core);
-
-            LoadGreateGreatChild();
-            dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[0].Selected = true;
+            var result = EFRepository<TCore>.Instance.AddEntity(core);
+            if (result)
+            {
+                LoadGreateGreatChild();
+                dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[0].Selected = true;
+            }
+            else
+            {
+                statusLabel.Text = ".AddEntity(core)失败了";
+            }
         }
 
         private void btnBuildHtml_Click(object sender, EventArgs e)
@@ -652,10 +658,10 @@ ins.mod {
                 hb.AddBodyItem(tcore.Title, tcore.SContent);
             }
 
-      var html=      hb.Build();
+            var html = hb.Build();
         }
 
-     
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -667,6 +673,98 @@ ins.mod {
             DlgAnalysis dlg = new DlgAnalysis();
             dlg.ShowDialog();
 
+        }
+
+        private void 重新整理pdfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //var rootDir = @"F:\all";
+            //var targetRootDir = @"F:\all\target";
+            //var files = Directory.GetFiles(rootDir);
+            //foreach (var item in files)
+            //{
+            //    var match = Regex.Match(item, @"(?<b>\d{4})");
+            //    if (match.Success)
+            //    {
+            //        var year = match.Groups["b"].Value;
+            //        var half = year + "年下半年";
+            //        if (item.Contains("上半年"))
+            //        {
+            //            half = year + "年上半年";
+            //        }
+            //        var targetDir = Path.Combine(targetRootDir, half);
+            //        if (Directory.Exists(targetDir) == false)
+            //        {
+            //            Directory.CreateDirectory(targetDir);
+            //        }
+
+            //        var targetPath = Path.Combine(targetDir, Path.GetFileName(item));
+            //        File.Copy(item, targetPath);
+            //    }
+            //}
+
+        }
+
+        private void 生成错题解析ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            webBrowser1.Document.Body.InnerHtml = "";
+            var fileName = GetOpenFilePath();
+            var html = File.ReadAllText(fileName, Encoding.UTF8);
+            var pattern = @"<span id=""tanalytic\d+-(?<tm>\d+)"">(?<b>[\s\S]*?)<title>[\s\S]*?</span>";
+            MatchCollection mcT = Regex.Matches(html, pattern);
+            foreach (Match item in mcT)
+            {
+                var match = item;
+                var reMatch = Regex.Match(item.Value, pattern, RegexOptions.RightToLeft);
+                if (reMatch.Success)
+                {
+                    match = reMatch;
+                }
+                GetTanalytic(match);
+            }
+        }
+
+        private void GetTanalytic(Match match)
+        {
+
+
+            var html = match.Value;
+            if (string.IsNullOrEmpty(match.Groups["b"].Value))
+            {
+                return;
+            }
+            html = Regex.Match(html,@"<span id="".*?"">(?<b>[\s\S]*?)<title>").Groups["b"].Value;
+            
+            html = Regex.Replace(html, "&nbsp;", "");
+            html = Regex.Replace(html, "<br.*?>", "</p><p>");
+            html = Regex.Replace(html, "<div", "<p");
+            html = Regex.Replace(html, "</div>", "</p>");
+            html = Regex.Replace(html, @"\s+", " ");
+            html = Regex.Replace(html, "(\r\n)+", "\r\n");
+             var removeTag = Regex.Replace(html, "<.*?>", "");
+            var sTm = match.Groups["tm"].Value;
+            var iTm = 0;
+            if (int.TryParse(sTm, out iTm))
+            {
+                sTm = (iTm+1).ToString("d2");
+            }
+            webBrowser1.Document.Body.InnerHtml += string.Format("<h3>第{0}题、{1}</h3>{2}", sTm, Util.GetTitle(removeTag), html);
+
+
+
+
+        }
+
+        private static string GetOpenFilePath(string fliter = "所有文件|*.*")
+        {
+            var fileName = "";
+            OpenFileDialog ofd = new OpenFileDialog();
+            var dr = ofd.ShowDialog();
+            if (dr == System.Windows.Forms.DialogResult.OK)
+            {
+                fileName = ofd.FileName;
+            }
+            ofd.Dispose();
+            return fileName;
         }
 
 
