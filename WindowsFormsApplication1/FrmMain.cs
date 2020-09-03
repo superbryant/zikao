@@ -670,9 +670,24 @@ ins.mod {
 
         private void 获取解析ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DlgAnalysis dlg = new DlgAnalysis();
-            dlg.ShowDialog();
+            //DlgAnalysis dlg = new DlgAnalysis();
+            //dlg.ShowDialog();
+            webBrowser1.Document.Body.InnerHtml = "";
+            var fileName = GetOpenFilePath();
+            var html = File.ReadAllText(fileName, Encoding.UTF8);
 
+            var matches = Regex.Matches(html, @"<div class=""fl"">(?<b>[\s\S]*?)</div>");
+            HtmlBuilder hb = new HtmlBuilder();
+            foreach (Match item in matches)
+            {
+                var match = item.Groups["b"].Value;
+                var removeTag = Regex.Replace(match, "<.*?>", "");
+                var title = Util.GetTitle(removeTag);
+                hb.AddBodyItem(title, match);
+            }
+
+            var outHtml = hb.Build();
+            webBrowser1.Document.Body.InnerHtml = outHtml;
         }
 
         private void 重新整理pdfToolStripMenuItem_Click(object sender, EventArgs e)
@@ -711,6 +726,7 @@ ins.mod {
             var html = File.ReadAllText(fileName, Encoding.UTF8);
             var pattern = @"<span id=""tanalytic\d+-(?<tm>\d+)"">(?<b>[\s\S]*?)<title>[\s\S]*?</span>";
             MatchCollection mcT = Regex.Matches(html, pattern);
+            HtmlBuilder hb = new HtmlBuilder();
             foreach (Match item in mcT)
             {
                 var match = item;
@@ -719,11 +735,12 @@ ins.mod {
                 {
                     match = reMatch;
                 }
-                GetTanalytic(match);
+                GetTanalytic(match, hb);
             }
+            hb.Build();
         }
 
-        private void GetTanalytic(Match match)
+        private void GetTanalytic(Match match, HtmlBuilder hb)
         {
 
 
@@ -732,25 +749,25 @@ ins.mod {
             {
                 return;
             }
-            html = Regex.Match(html,@"<span id="".*?"">(?<b>[\s\S]*?)<title>").Groups["b"].Value;
-            
+            html = Regex.Match(html, @"<span id="".*?"">(?<b>[\s\S]*?)<title>").Groups["b"].Value;
+
             html = Regex.Replace(html, "&nbsp;", "");
             html = Regex.Replace(html, "<br.*?>", "</p><p>");
             html = Regex.Replace(html, "<div", "<p");
             html = Regex.Replace(html, "</div>", "</p>");
             html = Regex.Replace(html, @"\s+", " ");
             html = Regex.Replace(html, "(\r\n)+", "\r\n");
-             var removeTag = Regex.Replace(html, "<.*?>", "");
+            var removeTag = Regex.Replace(html, "<.*?>", "");
             var sTm = match.Groups["tm"].Value;
             var iTm = 0;
             if (int.TryParse(sTm, out iTm))
             {
-                sTm = (iTm+1).ToString("d2");
+                sTm = (iTm + 1).ToString("d2");
             }
             webBrowser1.Document.Body.InnerHtml += string.Format("<h3>第{0}题、{1}</h3>{2}", sTm, Util.GetTitle(removeTag), html);
 
 
-
+            hb.AddBodyItem(Util.GetTitle(removeTag), html);
 
         }
 
@@ -765,6 +782,24 @@ ins.mod {
             }
             ofd.Dispose();
             return fileName;
+        }
+
+        private void tsmiYestoday_Click(object sender, EventArgs e)
+        {
+            Regex007GroupDialog gd = new Regex007GroupDialog(BuildType.yestoday);
+            gd.ShowDialog();
+        }
+
+        private void 寻找所有打卡内容ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Regex007GroupDialog gd = new Regex007GroupDialog(BuildType.all);
+            gd.ShowDialog();
+        }
+
+        private void 答题ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmChinesePraitice pc = new FrmChinesePraitice();
+            pc.ShowDialog();
         }
 
 

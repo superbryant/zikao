@@ -34,11 +34,13 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiComplected = new System.Windows.Forms.ToolStripMenuItem();
             this.txtUrl = new System.Windows.Forms.TextBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnGatherLession = new System.Windows.Forms.Button();
             this.btnGather = new System.Windows.Forms.Button();
             this.btnGoto = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnDown = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnGatherLessionV2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -61,6 +63,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.txtUrl);
             this.splitContainer1.Panel2.Controls.Add(this.txtSearch);
+            this.splitContainer1.Panel2.Controls.Add(this.btnGatherLessionV2);
+            this.splitContainer1.Panel2.Controls.Add(this.btnGatherLession);
             this.splitContainer1.Panel2.Controls.Add(this.btnGather);
             this.splitContainer1.Panel2.Controls.Add(this.btnGoto);
             this.splitContainer1.Panel2.Controls.Add(this.btnDown);
@@ -105,6 +109,23 @@
             this.txtUrl.Size = new System.Drawing.Size(661, 21);
             this.txtUrl.TabIndex = 2;
             // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(15, 13);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(221, 21);
+            this.txtSearch.TabIndex = 2;
+            // 
+            // btnGatherLession
+            // 
+            this.btnGatherLession.Location = new System.Drawing.Point(574, 12);
+            this.btnGatherLession.Name = "btnGatherLession";
+            this.btnGatherLession.Size = new System.Drawing.Size(73, 23);
+            this.btnGatherLession.TabIndex = 1;
+            this.btnGatherLession.Text = "采集课程";
+            this.btnGatherLession.UseVisualStyleBackColor = true;
+            this.btnGatherLession.Click += new System.EventHandler(this.btnGatherLession_Click);
+            // 
             // btnGather
             // 
             this.btnGather.Location = new System.Drawing.Point(345, 12);
@@ -125,6 +146,16 @@
             this.btnGoto.UseVisualStyleBackColor = true;
             this.btnGoto.Click += new System.EventHandler(this.btnGoto_Click);
             // 
+            // btnDown
+            // 
+            this.btnDown.Location = new System.Drawing.Point(460, 13);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(97, 23);
+            this.btnDown.TabIndex = 1;
+            this.btnDown.Text = "下载";
+            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            // 
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(242, 12);
@@ -135,22 +166,15 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // txtSearch
+            // btnGatherLessionV2
             // 
-            this.txtSearch.Location = new System.Drawing.Point(15, 13);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(221, 21);
-            this.txtSearch.TabIndex = 2;
-            // 
-            // btnDown
-            // 
-            this.btnDown.Location = new System.Drawing.Point(460, 13);
-            this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(97, 23);
-            this.btnDown.TabIndex = 1;
-            this.btnDown.Text = "下载";
-            this.btnDown.UseVisualStyleBackColor = true;
-            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            this.btnGatherLessionV2.Location = new System.Drawing.Point(653, 13);
+            this.btnGatherLessionV2.Name = "btnGatherLessionV2";
+            this.btnGatherLessionV2.Size = new System.Drawing.Size(91, 23);
+            this.btnGatherLessionV2.TabIndex = 1;
+            this.btnGatherLessionV2.Text = "采集课程V2";
+            this.btnGatherLessionV2.UseVisualStyleBackColor = true;
+            this.btnGatherLessionV2.Click += new System.EventHandler(this.btnGatherLessionV2_Click);
             // 
             // dlgAttachment
             // 
@@ -183,5 +207,7 @@
         private System.Windows.Forms.Button btnGoto;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnDown;
+        private System.Windows.Forms.Button btnGatherLession;
+        private System.Windows.Forms.Button btnGatherLessionV2;
     }
 }

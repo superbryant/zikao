@@ -64,26 +64,27 @@ namespace Dal
         }
         public bool AddEntity(TEntity entity)
         {
-
-            try
-            {
-                EntityState state = Context.Entry(entity).State;
-                if (state == EntityState.Detached)
+            
+                try
                 {
-                    Context.Entry(entity).State = EntityState.Added;
+                    EntityState state = Context.Entry(entity).State;
+                    if (state == EntityState.Detached)
+                    {
+                        Context.Entry(entity).State = EntityState.Added;
+                    }
+                    Context.SaveChanges();
+                    return true;
                 }
-                Context.SaveChanges();
-                return true;
-            }
-            catch (DbEntityValidationException ex)
-            {
-                LogHelper.Ins.DbError(ex);
-            }
-            catch (Exception ex)
-            {
-                LogHelper.Ins.Error(ex);
-            }
-            return false;
+                catch (DbEntityValidationException ex)
+                {
+                    LogHelper.Ins.DbError(ex);
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.Ins.Error(ex);
+                }
+                return false;
+             
         }
         public bool UpdateEntity(TEntity entity)
         {

@@ -5,6 +5,29 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ZiKaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="OO7_Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Author" Type="nvarchar" MaxLength="150" />
+          <Property Name="Times" Type="int" />
+          <Property Name="Content" Type="nvarchar" MaxLength="2050" />
+          <Property Name="PubDate" Type="datetime" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="P_ChinesePractice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="word" Type="varchar" MaxLength="50" />
+          <Property Name="pinyin" Type="varchar" MaxLength="50" />
+          <Property Name="todayIndex" Type="int" />
+          <Property Name="crateDate" Type="datetime" />
+          <Property Name="sucess" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Question">
           <Key>
             <PropertyRef Name="Id" />
@@ -46,6 +69,7 @@
           <Property Name="fileUrl" Type="varchar" MaxLength="500" />
           <Property Name="record" Type="varchar" MaxLength="50" />
           <Property Name="id" Type="int" />
+          <Property Name="prefix" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="TCore">
           <Key>
@@ -58,6 +82,23 @@
           <Property Name="FStatus" Type="bit" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TeachUnit">
+          <Key>
+            <PropertyRef Name="TeachId" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="50" />
+          <Property Name="TeachId" Type="int" Nullable="false" />
+          <Property Name="EncryptStr" Type="varchar" MaxLength="50" />
+          <Property Name="TimeMillis" Type="varchar" MaxLength="50" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TeachUnitName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AttendClassTime" Type="varchar" MaxLength="50" />
+          <Property Name="PlayWebCastId" Type="varchar" MaxLength="50" />
+          <Property Name="Provider" Type="varchar" MaxLength="50" />
+          <Property Name="Webroot" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="TIssue">
           <Key>
@@ -122,10 +163,13 @@
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
         <EntityContainer Name="ZiKaoModelStoreContainer">
+          <EntitySet Name="OO7_Group" EntityType="Self.OO7_Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="P_ChinesePractice" EntityType="Self.P_ChinesePractice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TAttachment" EntityType="Self.TAttachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TCore" EntityType="Self.TCore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeachUnit" EntityType="Self.TeachUnit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIssue" EntityType="Self.TIssue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIssueSubject" EntityType="Self.TIssueSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -198,6 +242,9 @@
           <EntitySet Name="Topic" EntityType="ZiKaoModel.Topic" />
           <EntitySet Name="Question" EntityType="ZiKaoModel.Question" />
           <EntitySet Name="TAttachment" EntityType="ZiKaoModel.TAttachment" />
+          <EntitySet Name="TeachUnit" EntityType="ZiKaoModel.TeachUnit" />
+          <EntitySet Name="OO7_Group" EntityType="ZiKaoModel.OO7_Group" />
+          <EntitySet Name="P_ChinesePractice" EntityType="ZiKaoModel.P_ChinesePractice" />
         </EntityContainer>
         <EntityType Name="Users">
           <Key>
@@ -268,6 +315,47 @@
           <Property Name="fileUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="record" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="id" Type="Int32" />
+          <Property Name="prefix" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TeachUnit">
+          <Key>
+            <PropertyRef Name="TeachId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TeachId" Type="Int32" Nullable="false" />
+          <Property Name="EncryptStr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TimeMillis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TeachUnitName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AttendClassTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PlayWebCastId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Provider" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Webroot" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="OO7_Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Author" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Times" Type="Int32" />
+          <Property Name="Content" Type="String" MaxLength="2050" FixedLength="false" Unicode="true" />
+          <Property Name="PubDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="P_ChinesePractice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="word" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pinyin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="todayIndex" Type="Int32" />
+          <Property Name="crateDate" Type="DateTime" Precision="3" />
+          <Property Name="sucess" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -383,6 +471,7 @@
           <EntitySetMapping Name="TAttachment">
             <EntityTypeMapping TypeName="ZiKaoModel.TAttachment">
               <MappingFragment StoreEntitySet="TAttachment">
+                <ScalarProperty Name="prefix" ColumnName="prefix" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="record" ColumnName="record" />
                 <ScalarProperty Name="fileUrl" ColumnName="fileUrl" />
@@ -395,6 +484,49 @@
                 <ScalarProperty Name="businessId" ColumnName="businessId" />
                 <ScalarProperty Name="batchId" ColumnName="batchId" />
                 <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeachUnit">
+            <EntityTypeMapping TypeName="ZiKaoModel.TeachUnit">
+              <MappingFragment StoreEntitySet="TeachUnit">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Webroot" ColumnName="Webroot" />
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+                <ScalarProperty Name="PlayWebCastId" ColumnName="PlayWebCastId" />
+                <ScalarProperty Name="AttendClassTime" ColumnName="AttendClassTime" />
+                <ScalarProperty Name="TeachUnitName" ColumnName="TeachUnitName" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="TimeMillis" ColumnName="TimeMillis" />
+                <ScalarProperty Name="EncryptStr" ColumnName="EncryptStr" />
+                <ScalarProperty Name="TeachId" ColumnName="TeachId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OO7_Group">
+            <EntityTypeMapping TypeName="ZiKaoModel.OO7_Group">
+              <MappingFragment StoreEntitySet="OO7_Group">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="PubDate" ColumnName="PubDate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Times" ColumnName="Times" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="P_ChinesePractice">
+            <EntityTypeMapping TypeName="ZiKaoModel.P_ChinesePractice">
+              <MappingFragment StoreEntitySet="P_ChinesePractice">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="sucess" ColumnName="sucess" />
+                <ScalarProperty Name="crateDate" ColumnName="crateDate" />
+                <ScalarProperty Name="todayIndex" ColumnName="todayIndex" />
+                <ScalarProperty Name="pinyin" ColumnName="pinyin" />
+                <ScalarProperty Name="word" ColumnName="word" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -14,6 +14,9 @@
         <EntityTypeShape EntityType="ZiKaoModel.Topic" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="ZiKaoModel.Question" Width="1.5" PointX="0.75" PointY="7.75" />
         <EntityTypeShape EntityType="ZiKaoModel.TAttachment" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ZiKaoModel.TeachUnit" Width="1.5" PointX="3.375" PointY="8.75" />
+        <EntityTypeShape EntityType="ZiKaoModel.OO7_Group" Width="1.5" PointX="5.375" PointY="8.75" />
+        <EntityTypeShape EntityType="ZiKaoModel.P_ChinesePractice" Width="1.5" PointX="7.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

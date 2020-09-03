@@ -19,6 +19,7 @@ namespace WindowsFormsApplication1
                     return text.Substring(0, i);
                 }
             }
+            
             return text;
         }
     }

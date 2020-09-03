@@ -26,5 +26,6 @@ namespace Dal
         public string fileUrl { get; set; }
         public string record { get; set; }
         public Nullable<int> id { get; set; }
+        public string prefix { get; set; }
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.btnX1 = new System.Windows.Forms.Button();
             this.btnX2 = new System.Windows.Forms.Button();
             this.txtFliter = new System.Windows.Forms.TextBox();
@@ -58,6 +59,10 @@
             this.tsmiBuildCatalog = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.重新整理pdfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.生成错题解析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiYestoday = new System.Windows.Forms.ToolStripMenuItem();
+            this.寻找所有打卡内容ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cboSubject = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -84,7 +89,10 @@
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.btnSaveHtml = new System.Windows.Forms.Button();
             this.btnBuildHtml = new System.Windows.Forms.Button();
-            this.生成错题解析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.普通话练习ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.答题ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -102,6 +110,7 @@
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnX1
@@ -238,7 +247,9 @@
             this.科目ToolStripMenuItem,
             this.复习ToolStripMenuItem,
             this.cTOToolStripMenuItem,
-            this.tsmi});
+            this.tsmi,
+            this.toolStripMenuItem1,
+            this.普通话练习ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1009, 25);
@@ -363,10 +374,42 @@
             // 
             // 重新整理pdfToolStripMenuItem
             // 
+            this.重新整理pdfToolStripMenuItem.Enabled = false;
             this.重新整理pdfToolStripMenuItem.Name = "重新整理pdfToolStripMenuItem";
-            this.重新整理pdfToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.重新整理pdfToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.重新整理pdfToolStripMenuItem.Text = "重新整理pdf";
             this.重新整理pdfToolStripMenuItem.Click += new System.EventHandler(this.重新整理pdfToolStripMenuItem_Click);
+            // 
+            // 生成错题解析ToolStripMenuItem
+            // 
+            this.生成错题解析ToolStripMenuItem.Name = "生成错题解析ToolStripMenuItem";
+            this.生成错题解析ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.生成错题解析ToolStripMenuItem.Text = "生成错题解析";
+            this.生成错题解析ToolStripMenuItem.ToolTipText = "1、展开所有的错题解析\r\n2、F12后选中包含试卷所有题目的div\r\n3、拷贝到某一个文件里保存\r\n4、点击此按钮\r\n";
+            this.生成错题解析ToolStripMenuItem.Click += new System.EventHandler(this.生成错题解析ToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiYestoday,
+            this.寻找所有打卡内容ToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(41, 21);
+            this.toolStripMenuItem1.Text = "007";
+            // 
+            // tsmiYestoday
+            // 
+            this.tsmiYestoday.Name = "tsmiYestoday";
+            this.tsmiYestoday.Size = new System.Drawing.Size(172, 22);
+            this.tsmiYestoday.Text = "寻找昨天的数据";
+            this.tsmiYestoday.Click += new System.EventHandler(this.tsmiYestoday_Click);
+            // 
+            // 寻找所有打卡内容ToolStripMenuItem
+            // 
+            this.寻找所有打卡内容ToolStripMenuItem.Name = "寻找所有打卡内容ToolStripMenuItem";
+            this.寻找所有打卡内容ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.寻找所有打卡内容ToolStripMenuItem.Text = "寻找所有打卡内容";
+            this.寻找所有打卡内容ToolStripMenuItem.Click += new System.EventHandler(this.寻找所有打卡内容ToolStripMenuItem_Click);
             // 
             // cboSubject
             // 
@@ -630,18 +673,49 @@
             this.btnBuildHtml.UseVisualStyleBackColor = true;
             this.btnBuildHtml.Click += new System.EventHandler(this.btnBuildHtml_Click);
             // 
-            // 生成错题解析ToolStripMenuItem
+            // toolStrip1
             // 
-            this.生成错题解析ToolStripMenuItem.Name = "生成错题解析ToolStripMenuItem";
-            this.生成错题解析ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.生成错题解析ToolStripMenuItem.Text = "生成错题解析";
-            this.生成错题解析ToolStripMenuItem.Click += new System.EventHandler(this.生成错题解析ToolStripMenuItem_Click);
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 571);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1009, 25);
+            this.toolStrip1.TabIndex = 18;
+            this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.Visible = false;
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
+            // 
+            // 普通话练习ToolStripMenuItem
+            // 
+            this.普通话练习ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.答题ToolStripMenuItem});
+            this.普通话练习ToolStripMenuItem.Name = "普通话练习ToolStripMenuItem";
+            this.普通话练习ToolStripMenuItem.Size = new System.Drawing.Size(80, 21);
+            this.普通话练习ToolStripMenuItem.Text = "普通话练习";
+            // 
+            // 答题ToolStripMenuItem
+            // 
+            this.答题ToolStripMenuItem.Name = "答题ToolStripMenuItem";
+            this.答题ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.答题ToolStripMenuItem.Text = "答题";
+            this.答题ToolStripMenuItem.Click += new System.EventHandler(this.答题ToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1009, 596);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.splitContainer3);
             this.Controls.Add(this.chkCurSubject);
             this.Controls.Add(this.dataGridView1);
@@ -694,6 +768,8 @@
             this.splitContainer3.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -757,6 +833,13 @@
         private System.Windows.Forms.ToolStripMenuItem tsmi;
         private System.Windows.Forms.ToolStripMenuItem 重新整理pdfToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生成错题解析ToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiYestoday;
+        private System.Windows.Forms.ToolStripMenuItem 寻找所有打卡内容ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 普通话练习ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 答题ToolStripMenuItem;
     }
 }
 

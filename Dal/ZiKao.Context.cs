@@ -34,5 +34,8 @@ namespace Dal
         public virtual DbSet<Topic> Topic { get; set; }
         public virtual DbSet<Question> Question { get; set; }
         public virtual DbSet<TAttachment> TAttachment { get; set; }
+        public virtual DbSet<TeachUnit> TeachUnit { get; set; }
+        public virtual DbSet<OO7_Group> OO7_Group { get; set; }
+        public virtual DbSet<P_ChinesePractice> P_ChinesePractice { get; set; }
     }
 }
