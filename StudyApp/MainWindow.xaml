@@ -7,49 +7,63 @@
         mc:Ignorable="d"
         
         xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+xmlns:vm="clr-namespace:StudyApp"
+        d:DataContext="{d:DesignInstance vm:MainViewModel,IsDesignTimeCreatable=False}"
+        >
     <Window.Resources>
         <ResourceDictionary>
       
         </ResourceDictionary>
     </Window.Resources>
+    
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition  ></ColumnDefinition>
-            <ColumnDefinition Width="5"></ColumnDefinition>
-            <ColumnDefinition ></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30"></RowDefinition>
-                <RowDefinition ></RowDefinition>
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="到镰刀首页" Command="{Binding HomeSickleCommand}"></MenuItem>
+            <MenuItem Header="诡辩常用伎俩" Command="{Binding RegexCommand}"></MenuItem>
+        </Menu>
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="180"></ColumnDefinition>
+                <ColumnDefinition  ></ColumnDefinition>
+                <ColumnDefinition Width="5"></ColumnDefinition>
+                <ColumnDefinition ></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="txtUrl"></TextBox>
-            <Button Grid.Column="1" Content="跳转" Command="{Binding GoCommand}" ></Button>
-     
-            <cef:ChromiumWebBrowser Grid.Row="1" Grid.ColumnSpan="2" Address="{Binding Text,ElementName=txtUrl,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"></cef:ChromiumWebBrowser>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="180"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtUrl" Text="{Binding StudyUrl,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"></TextBox>
+                <Button Grid.Column="1" Content="跳转" Command="{Binding GoCommand}" ></Button>
+
+                <cef:ChromiumWebBrowser Grid.Row="1" Grid.ColumnSpan="2" Address="{Binding StudyUrl,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></cef:ChromiumWebBrowser>
+            </Grid>
+            <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" Width="5" HorizontalAlignment="Center"></GridSplitter>
+
+            <Grid  Grid.Column="2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="180"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtRecordUrl"  Text="{Binding RecordUrl,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <Button Grid.Column="1" Content="跳转" Command="{Binding GoCommand}" ></Button>
+
+                <cef:ChromiumWebBrowser Grid.Row="1" Grid.ColumnSpan="2" Address="{Binding   RecordUrl,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></cef:ChromiumWebBrowser>
+            </Grid>
         </Grid>
-        <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" Width="5" HorizontalAlignment="Center"></GridSplitter>
 
-        <Grid  Grid.Column="2" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30"></RowDefinition>
-                <RowDefinition ></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="180"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <TextBox x:Name="txtRecordUrl"></TextBox>
-            <Button Grid.Column="1" Content="跳转" Command="{Binding GoCommand}" ></Button>
 
-            <cef:ChromiumWebBrowser Grid.Row="1" Grid.ColumnSpan="2" Address="{Binding  Text,ElementName=  txtRecordUrl,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"></cef:ChromiumWebBrowser>
-        </Grid>
-
-   
     </Grid>
 </Window>

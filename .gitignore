@@ -43,6 +43,10 @@ build/
 *.vssscc
 .builds
 *.pidb
+*.vsidx
+*.v2
+*.v5.1
+*.lock
 *.log
 *.scc
 
